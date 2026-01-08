@@ -1,7 +1,7 @@
 
 ## content
 
-* [#Architecture overview](%23Architecture%20overview)
+* [Architecture overview](%23Architecture%20overview)
 * [#S3 Bucket (Static Website Storage)](%23S3%20Bucket%20(Static%20Website%20Storage))
 * [#CloudFront (content delivery network)](%23CloudFront%20(content%20delivery%20network))
 * [#ACM certificate (HTTPS)](%23ACM%20certificate%20(HTTPS))
