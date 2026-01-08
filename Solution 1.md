@@ -1,7 +1,7 @@
 
 ## content
 
-* [Architecture overview](%23Architecture%20overview)
+* [#Architecture overview](%23Architecture%20overview)
 * [#S3 Bucket (Static Website Storage)](%23S3%20Bucket%20(Static%20Website%20Storage))
 * [#CloudFront (content delivery network)](%23CloudFront%20(content%20delivery%20network))
 * [#ACM certificate (HTTPS)](%23ACM%20certificate%20(HTTPS))
@@ -32,7 +32,7 @@ index.html + static assets
 ```
 
 
-![](b4da18f0be779656a71f4945e5ae630d.png)
+![](attachment/b4da18f0be779656a71f4945e5ae630d.png)
 
 * Key points:
 	- The S3 bucket is **private**
@@ -92,7 +92,7 @@ CloudFront provides performance, security, and HTTPS support.
 ### Why making ACM certificate? 
 
 * Now if we tried to put the record (cloud front with ahmadquraan.htufolio) in the hosted zone in Route 53, we will face a big issue which is that our domain is not secure (HTTP), and such window will appear.
-* ![](7e4dc29351fb9fcab41e4552fc3de85d.png)
+* ![](attachment/7e4dc29351fb9fcab41e4552fc3de85d.png)
 
 * and to make it secure we need to make a certification using **AWS Certificate manager**.
 
@@ -103,13 +103,13 @@ search certificate manager --> request # Make sure you are in us-east-1
 ```
 
 * Certificate was created in **us-east-1** (required for CloudFront). --> doesn't accept any other certificate.
-* ![](9b4e77e28e0466f4b019eff3a084b725.png)
+* ![](attachment/9b4e77e28e0466f4b019eff3a084b725.png)
 
 * After that:
-![](f08558455a209a8ce52795ae3ab1ae36.png)
+![](attachment/f08558455a209a8ce52795ae3ab1ae36.png)
  * In the domain name just put your domain name (the one you wanna make a record on the hosted zone) ex: **ahmadquraan.htufolio.com**.
  * Now two values will appear in the certification, CNAME name and value.
- * ![](6c80cb3100b0e1d23117a92934cda928.png)
+ * ![](attachment/6c80cb3100b0e1d23117a92934cda928.png)
  * Now the certification will remain under "validation" until you make a specific DNS record for it in the hosted zone using those values--> **Create this CNAME record with this exact value**.  The ACM record **Must be created in the SAME hosted zone as the domain** you’re requesting the certificate for.
  * So go to the hosted zone (Yazan IAM account) then make a new record there with the **CNAME name as it's name and CNAME value as it's value**
  
@@ -121,7 +121,7 @@ search certificate manager --> request # Make sure you are in us-east-1
 * After that you need to get back to the cloudFront and give it the certification that you wanna use. `CloudFront -> General -> Edit`
 	* The CNAME -> IS your domain name.
 	* SSL certificate -> your certification.
-* ![](08b7e24922422fd1b3b6bb6e955c3b2b.png)
+* ![](attachment/08b7e24922422fd1b3b6bb6e955c3b2b.png)
 
 
 
@@ -180,14 +180,14 @@ CNAME name: _17bbfb5bfe5ff40e2bb9df65cb0e97c8.ahmadquraan.htufolio.com
 CNAME value: _c3bccf0a4878085a4084522ef1f69804.jkddzztszm.acm-validations.aws
 	```
 	
-	![](87bb3f36d2f15cede198944a13361bc3.png)
+	![](attachment/87bb3f36d2f15cede198944a13361bc3.png)
 
 	
 	2) Website record (Main record):
 		* type: CNAME
 		* Name: ahmadquraan
 		* Value: dxxxxxxxxxxxxx.cloudfront.net
-![](67e7d6e1602d62f80e3b65717e7619f6.png)
+![](attachment/67e7d6e1602d62f80e3b65717e7619f6.png)
 
 
 
